@@ -4,6 +4,19 @@ import * as Tone from "tone";
 
 const LETTERS = ["C", "D", "E", "F", "G", "A", "B"];
 const ACCIDENTALS = ["#", "b", ""];
+const INTERVALS = [
+    "1P",
+    "2m",
+    "2M",
+    "3m",
+    "3M",
+    "4P",
+    "5P",
+    "6m",
+    "6M",
+    "7m",
+    "7M",
+];
 const synth = new Tone.Synth().toDestination();
 
 /**
@@ -12,15 +25,13 @@ const synth = new Tone.Synth().toDestination();
  * @param endOctave highest octave
  * @returns A random note in scientific notation within a given range as a string
  */
-export function getRandomNote(
-    startOctave: number = 3,
-    endOctave: number = 4
-): string {
+function getRandomNote(startOctave: number = 3, endOctave: number = 4): string {
     const OCTAVE =
         Math.floor(Math.random() * (endOctave - startOctave + 1)) + startOctave;
 
     const LETTER_INDEX = Math.floor(Math.random() * LETTERS.length);
     const ACCIDENTAL_INDEX = Math.floor(Math.random() * ACCIDENTALS.length);
+
     const NOTE = LETTERS[LETTER_INDEX] + ACCIDENTALS[ACCIDENTAL_INDEX];
 
     return NOTE + OCTAVE.toString();
@@ -52,12 +63,12 @@ export const RandomNoteGenerator: React.FC = () => {
     );
 };
 
-type NotePlayerProps = {
+type NotePlayerButtonProps = {
     note: string;
     buttonText: string;
 };
 
-export const NotePlayerButton: React.FC<NotePlayerProps> = ({
+const NotePlayerButton: React.FC<NotePlayerButtonProps> = ({
     note,
     buttonText,
 }) => {
@@ -75,20 +86,6 @@ export const NotePlayerButton: React.FC<NotePlayerProps> = ({
 };
 
 function getRandomInterval(): string {
-    const INTERVALS = [
-        "1P",
-        "2M",
-        "2m",
-        "3M",
-        "3m",
-        "4P",
-        "5P",
-        "6M",
-        "6m",
-        "7M",
-        "7m",
-    ];
-
     const INTERVAL_INDEX = Math.floor(Math.random() * INTERVALS.length);
 
     return INTERVALS[INTERVAL_INDEX];
@@ -101,7 +98,7 @@ function flipInterval(interval: string): string {
     return NAME + QUALITY;
 }
 
-export const IntervalPlayer: React.FC = () => {
+export const IntervalExplorer: React.FC = () => {
     const [interval, setInterval] = useState<{
         name: string;
         firstNote: string;
@@ -125,45 +122,69 @@ export const IntervalPlayer: React.FC = () => {
     }
 
     function handleClick(intervalType: string): void {
-        switch (intervalType) {
-            case "random":
-                const INTERVAL_NAME = getRandomInterval();
-                const FIRST_NOTE = getRandomNote();
-                const SECOND_NOTE = Note.transpose(FIRST_NOTE, INTERVAL_NAME);
-
-                setInterval({
-                    name: INTERVAL_NAME,
-                    firstNote: FIRST_NOTE,
-                    secondNote: SECOND_NOTE,
-                });
-                break;
-            default:
-                break;
+        if (intervalType === "random") {
+            intervalType = flipInterval(getRandomInterval()); // flipping because will unflip later in general code
         }
+
+        const FIRST_NOTE = getRandomNote();
+        const SECOND_NOTE = Note.transpose(FIRST_NOTE, intervalType);
+
+        setInterval({
+            name: flipInterval(intervalType),
+            firstNote: FIRST_NOTE,
+            secondNote: SECOND_NOTE,
+        });
     }
+
+    type IntervalButtonProps = {
+        interval: string;
+    };
+
+    const IntervalButton: React.FC<IntervalButtonProps> = ({ interval }) => {
+        interval = flipInterval(interval);
+
+        return (
+            <button
+                onClick={() => {
+                    handleClick(interval);
+                }}
+            >
+                {interval}
+            </button>
+        );
+    };
+
+    const intervalButtons = INTERVALS.map((interval) => {
+        return <IntervalButton interval={interval} />;
+    });
 
     return (
         <div>
-            <h2>Interval Player</h2>
+            <h2>Interval Explorer</h2>
             <p>
                 {interval.firstNote} - {interval.secondNote}
             </p>
             <p>{flipInterval(interval.name)}</p>
-            <button
-                onClick={() => {
-                    handleClick("random");
-                }}
-            >
-                Random
-            </button>
-            <NotePlayerButton
-                note={interval.firstNote}
-                buttonText={interval.firstNote}
-            />
-            <NotePlayerButton
-                note={interval.secondNote}
-                buttonText={interval.secondNote}
-            />
+            <div>
+                <NotePlayerButton
+                    note={interval.firstNote}
+                    buttonText={interval.firstNote}
+                />
+                <NotePlayerButton
+                    note={interval.secondNote}
+                    buttonText={interval.secondNote}
+                />
+            </div>
+            <div>
+                <button
+                    onClick={() => {
+                        handleClick("random");
+                    }}
+                >
+                    Random
+                </button>
+                <div>{intervalButtons}</div>
+            </div>
         </div>
     );
 };

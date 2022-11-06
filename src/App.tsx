@@ -3,7 +3,7 @@ import "./App.css";
 // Components
 import QuestionCard from "./components/QuestionCard";
 // Util
-import { IntervalPlayer, RandomNoteGenerator } from "./utils/RandomMusic";
+import { IntervalExplorer, RandomNoteGenerator } from "./utils/RandomMusic";
 
 const TOTAL_QUESTIONS = 10;
 
@@ -41,7 +41,7 @@ function App() {
                 Next Question
             </button> */}
             <RandomNoteGenerator />
-            <IntervalPlayer />
+            <IntervalExplorer />
         </div>
     );
 }
