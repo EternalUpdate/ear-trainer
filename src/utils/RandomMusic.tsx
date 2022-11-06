@@ -3,6 +3,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import * as Tone from "tone";
 
 const LETTERS = ["C", "D", "E", "F", "G", "A", "B"];
+const ACCIDENTALS = ["#", "b", ""];
 const synth = new Tone.Synth().toDestination();
 
 /**
@@ -18,8 +19,9 @@ export function getRandomNote(
     const OCTAVE =
         Math.floor(Math.random() * (endOctave - startOctave + 1)) + startOctave;
 
-    const LETTER_INDEX = Math.floor(Math.random() * 7);
-    const NOTE = LETTERS[LETTER_INDEX];
+    const LETTER_INDEX = Math.floor(Math.random() * LETTERS.length);
+    const ACCIDENTAL_INDEX = Math.floor(Math.random() * ACCIDENTALS.length);
+    const NOTE = LETTERS[LETTER_INDEX] + ACCIDENTALS[ACCIDENTAL_INDEX];
 
     return NOTE + OCTAVE.toString();
 }
