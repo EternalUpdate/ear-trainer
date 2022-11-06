@@ -38,11 +38,11 @@ function getRandomNote(startOctave: number = 3, endOctave: number = 4): string {
 }
 
 export const RandomNoteGenerator: React.FC = () => {
-    const [note, setNote] = useState<string>("new note");
+    const [note, setNote] = useState<string>("");
 
     // when note changes
     useEffect(() => {
-        if (note !== "new note") {
+        if (note !== "") {
             synth.triggerAttackRelease(note, "8n");
         }
     }, [note]);
@@ -77,7 +77,7 @@ const NotePlayerButton: React.FC<NotePlayerButtonProps> = ({
     return (
         <button
             onClick={() => {
-                if (note !== "new note") {
+                if (note !== "") {
                     synth.triggerAttackRelease(Note.simplify(note), "8n");
                 }
             }}
@@ -105,7 +105,7 @@ export const IntervalExplorer: React.FC = () => {
         name: string;
         firstNote: string;
         secondNote: string;
-    }>({ name: "", firstNote: "", secondNote: "" });
+    }>({ name: "", firstNote: "C4", secondNote: "G4" });
 
     // if the interval changes
     useEffect(() => {
@@ -170,7 +170,7 @@ export const IntervalExplorer: React.FC = () => {
             <p>
                 {interval.firstNote} - {interval.secondNote}
             </p>
-            <p>{flipInterval(interval.name)}</p>
+            <p className="subtext">{flipInterval(interval.name)}</p>
             <div className="button-holder">
                 <NotePlayerButton
                     note={interval.firstNote}

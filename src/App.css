@@ -98,3 +98,11 @@ button:focus {
   color: rgb(235, 251, 6);
   font-weight: 600;
 }
+
+.subtext {
+  font-size: 1.25rem;
+  font-weight: 300;
+  font-style: italic;
+  margin-top: -0.5rem;
+  margin-bottom: 2rem;
+}
