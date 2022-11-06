@@ -48,17 +48,19 @@ export const RandomNoteGenerator: React.FC = () => {
     }, [note]);
 
     return (
-        <div>
+        <div className="card">
             <h2>Random Note Generator</h2>
             <p>{note}</p>
-            <button
-                onClick={() => {
-                    setNote(getRandomNote());
-                }}
-            >
-                Generate new note
-            </button>
-            <NotePlayerButton note={note} buttonText={"Play note"} />
+            <div className="button-holder">
+                <button
+                    onClick={() => {
+                        setNote(getRandomNote());
+                    }}
+                >
+                    Generate new note
+                </button>
+                <NotePlayerButton note={note} buttonText={"Play note"} />
+            </div>
         </div>
     );
 };
@@ -163,13 +165,13 @@ export const IntervalExplorer: React.FC = () => {
     });
 
     return (
-        <div>
+        <div className="card">
             <h2>Interval Explorer</h2>
             <p>
                 {interval.firstNote} - {interval.secondNote}
             </p>
             <p>{flipInterval(interval.name)}</p>
-            <div>
+            <div className="button-holder">
                 <NotePlayerButton
                     note={interval.firstNote}
                     buttonText={interval.firstNote}
@@ -179,7 +181,7 @@ export const IntervalExplorer: React.FC = () => {
                     buttonText={interval.secondNote}
                 />
             </div>
-            <div>
+            <div className="button-holder">
                 <button
                     onClick={() => {
                         handleClick("random");
@@ -187,8 +189,8 @@ export const IntervalExplorer: React.FC = () => {
                 >
                     Random
                 </button>
-                <div>{intervalButtons}</div>
             </div>
+            <div className="button-holder"> {intervalButtons}</div>
         </div>
     );
 };
