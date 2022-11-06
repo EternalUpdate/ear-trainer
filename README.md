@@ -15,7 +15,7 @@ https://eternalupdate.github.io/ear-trainer/
 ## Features
 * A random note generator which displays a random note and plays it back. 
     * New notes can be generated with the press of a button.
-* An interval player which plays and displays a random example of any chosen interval ('random' is also an option). 
+* An interval explorer which plays and displays a random example of any chosen interval ('random' is also an option). 
     * The notes forming the interval can be played individually via buttons. 
     * Pressing on one of the interval buttons will generate a new example of that kind of interval.
     
