@@ -78,7 +78,7 @@ const NotePlayerButton: React.FC<NotePlayerButtonProps> = ({
         <button
             onClick={() => {
                 if (note !== "new note") {
-                    synth.triggerAttackRelease(note, "8n");
+                    synth.triggerAttackRelease(Note.simplify(note), "8n");
                 }
             }}
         >
