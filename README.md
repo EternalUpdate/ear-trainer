@@ -1,6 +1,9 @@
-# [Ear Trainer](https://eternalupdate.github.io/ear-trainer/)
+# Ear Trainer
 ## Information
 This project aims to provide the user with a variety of tools that can be used to improve one's musical ear.
+
+## Link
+https://eternalupdate.github.io/ear-trainer/
 
 ## Technologies
 * React
@@ -20,6 +23,3 @@ This project aims to provide the user with a variety of tools that can be used t
 * A chord player which will work similarly to the interval player but will include different chord qualities instead.
 * An interactive quiz to recognize different types of intervals and chord qualities.
 * An interactive quiz to sing different types of intervals and chord qualities. It would rely on user self-evaluation and not voice recognition, so that the user can practice in situations where they cannot make much sound.
-
-## Link
-https://eternalupdate.github.io/ear-trainer/
