@@ -112,9 +112,13 @@ export const IntervalExplorer: React.FC = () => {
 
     function playInterval(): void {
         if (interval.name !== "") {
-            synth.triggerAttackRelease(interval.firstNote, "8n", Tone.now());
             synth.triggerAttackRelease(
-                interval.secondNote,
+                Note.simplify(interval.firstNote),
+                "8n",
+                Tone.now()
+            );
+            synth.triggerAttackRelease(
+                Note.simplify(interval.secondNote),
                 "8n",
                 Tone.now() + 0.5
             );
