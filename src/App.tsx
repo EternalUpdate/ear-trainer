@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import "./App.css";
 // Components
-import {
-    IntervalExplorer,
-    RandomNoteGenerator,
-} from "./components/RandomMusic";
+import { IntervalGenerator } from "./components/IntervalExplorer";
+import { RandomNoteGenerator } from "./components/RandomNoteGenerator";
 
 const TOTAL_QUESTIONS = 10;
 
@@ -13,7 +11,7 @@ function App() {
         <div className="App">
             <h1>Ear Trainer</h1>
             <RandomNoteGenerator />
-            <IntervalExplorer />
+            <IntervalGenerator />
             <div className="footer">
                 <p>
                     Brought to you by{" "}
